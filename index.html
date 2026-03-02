@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Girada Bhanuprasad</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+
+    body {
+      background:#050505;
+      color:#d4d4d4;
+      font-family:'Inter',sans-serif;
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    /* thin left accent line */
+    body::after {
+      content:'';
+      position:fixed;
+      left:0; top:0; bottom:0;
+      width:2px;
+      background:linear-gradient(to bottom, transparent, #7c83f5 30%, #3ecf8e 70%, transparent);
+      opacity:.5;
+    }
+
+    a { color:inherit; text-decoration:none; }
+
+    /* ── LAYOUT ── */
+    .wrap {
+      max-width:720px;
+      margin:0 auto;
+      padding:80px 2rem 120px;
+    }
+
+    /* ── HEADER ── */
+    header { margin-bottom:72px; }
+
+    .tag {
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-family:'JetBrains Mono',monospace;
+      font-size:11px;
+      color:#555;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:20px;
+    }
+    .tag::before {
+      content:'';
+      width:18px; height:1px;
+      background:#333;
+    }
+
+    h1 {
+      font-size:clamp(2rem, 5vw, 3rem);
+      font-weight:700;
+      color:#fff;
+      letter-spacing:-1.5px;
+      line-height:1.1;
+    }
+    h1 .accent {
+      background:linear-gradient(90deg, #7c83f5, #3ecf8e);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+
+    .sub {
+      margin-top:16px;
+      color:#555;
+      font-size:14px;
+      font-family:'JetBrains Mono',monospace;
+    }
+
+    /* socials — two small pills only */
+    .socials {
+      display:flex;
+      gap:10px;
+      margin-top:28px;
+      align-items:center;
+    }
+    .soc {
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:7px 16px;
+      border-radius:999px;
+      border:1px solid #1e1e1e;
+      background:#0d0d0d;
+      font-size:12.5px;
+      font-weight:500;
+      color:#aaa;
+      transition:border-color .2s, color .2s;
+    }
+    .soc:hover { border-color:#7c83f5; color:#fff; }
+    .soc svg { flex-shrink:0; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height:1px;
+      background:linear-gradient(90deg, #1a1a1a, #2a2a2a 40%, transparent);
+      margin:56px 0;
+    }
+
+    /* ── SECTION TITLE ── */
+    .stitle {
+      font-family:'JetBrains Mono',monospace;
+      font-size:11px;
+      color:#444;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      margin-bottom:24px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .stitle span { font-size:14px; }
+    .stitle::after {
+      content:'';
+      flex:1;
+      height:1px;
+      background:#1a1a1a;
+    }
+
+    /* ── ABOUT ── */
+    .about-list {
+      list-style:none;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .about-list li {
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      color:#888;
+      font-size:14px;
+      line-height:1.7;
+      padding:14px 16px;
+      background:#0a0a0a;
+      border:1px solid #141414;
+      border-radius:8px;
+      transition:border-color .2s;
+    }
+    .about-list li:hover { border-color:#222; }
+    .about-list li .em { font-size:16px; flex-shrink:0; margin-top:1px; }
+    .about-list li strong { color:#ccc; }
+
+    /* ── TECH STACK ── */
+    .tech-group { margin-bottom:32px; }
+    .tech-group-name {
+      font-family:'JetBrains Mono',monospace;
+      font-size:10px;
+      color:#333;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    .badges {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .badge {
+      display:inline-flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      width:80px;
+      padding:14px 8px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.04);
+      font-size:10.5px;
+      font-weight:500;
+      color:#fff;
+      transition:transform .18s, box-shadow .18s;
+      cursor:default;
+      letter-spacing:.01em;
+      text-align:center;
+    }
+    .badge:hover {
+      transform:translateY(-4px);
+      box-shadow:0 8px 24px rgba(0,0,0,0.5);
+    }
+    .badge .logo {
+      width:30px; height:30px;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .badge .logo svg { width:100%; height:100%; }
+    .badge .logo img { width:100%; height:100%; object-fit:contain; }
+
+    /* ── GITHUB STATS ── */
+    .stats-imgs {
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .stats-imgs img {
+      width:100%;
+      border-radius:10px;
+      border:1px solid #141414;
+      display:block;
+    }
+    .stats-row {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    /* contrib */
+    .contrib {
+      background:#0a0a0a;
+      border:1px solid #141414;
+      border-radius:10px;
+      padding:20px;
+    }
+    .contrib-label {
+      font-family:'JetBrains Mono',monospace;
+      font-size:10px;
+      color:#333;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      margin-bottom:12px;
+    }
+    .cgrid {
+      display:grid;
+      grid-template-columns:repeat(53,1fr);
+      gap:2px;
+    }
+    .cc {
+      aspect-ratio:1;
+      border-radius:2px;
+    }
+    .lv0{background:#111}
+    .lv1{background:#0e3b2e}
+    .lv2{background:#006d32}
+    .lv3{background:#26a641}
+    .lv4{background:#39d353}
+
+    /* ── TROPHIES ── */
+    .trophy-img {
+      width:100%;
+      border-radius:10px;
+      border:1px solid #141414;
+      display:block;
+    }
+    .trophy-manual {
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      margin-top:12px;
+    }
+    .tc {
+      background:#0a0a0a;
+      border:1px solid #141414;
+      border-radius:8px;
+      padding:16px 8px;
+      text-align:center;
+      transition:border-color .2s, transform .2s;
+    }
+    .tc:hover { border-color:#2e2e2e; transform:translateY(-2px); }
+    .tc .em { font-size:1.5rem; }
+    .tc .tn { font-size:11px; color:#555; font-family:'JetBrains Mono',monospace; margin-top:6px; }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top:100px;
+      padding-top:32px;
+      border-top:1px solid #141414;
+      font-family:'JetBrains Mono',monospace;
+      font-size:11px;
+      color:#333;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    footer a { color:#444; transition:color .2s; }
+    footer a:hover { color:#7c83f5; }
+
+    @media(max-width:600px){
+      .stats-row { grid-template-columns:1fr; }
+      .trophy-manual { grid-template-columns:repeat(2,1fr); }
+      .cgrid { grid-template-columns:repeat(26,1fr); }
+      footer { flex-direction:column; gap:8px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <header>
+    <div class="tag">Portfolio · 2026</div>
+    <h1>Girada<br/><span class="accent">Bhanuprasad</span></h1>
+    <div class="sub">ML Enthusiast &nbsp;/&nbsp; Student Coordinator &nbsp;/&nbsp; Builder</div>
+
+    <div class="socials">
+      <a href="http://www.linkedin.com/in/giradabhanuprasad" target="_blank" class="soc">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#0a66c2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="mailto:giradabhanuprasad@gmail.com" class="soc">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d44638" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        Mail
+      </a>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section>
+    <div class="stitle"><span>💫</span> About Me</div>
+    <ul class="about-list">
+      <li><span class="em">🤖</span><span>Passionate about <strong>machine learning</strong> and love learning how it works.</span></li>
+      <li><span class="em">💻</span><span>Enjoy coding and <strong>building real-world projects</strong> using what I learn.</span></li>
+      <li><span class="em">🔍</span><span>Take initiative to <strong>explore new tools &amp; technologies</strong> and solve problems.</span></li>
+      <li><span class="em">🤝</span><span>Like to <strong>help others</strong> and lead activities as a <strong>student coordinator</strong>.</span></li>
+      <li><span class="em">📈</span><span>Always improving by <strong>learning from mistakes</strong> and working hard.</span></li>
+    </ul>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TECH STACK -->
+  <section>
+    <div class="stitle"><span>💻</span> Tech Stack</div>
+
+    <div class="tech-group">
+      <div class="tech-group-name">Languages &amp; Web</div>
+      <div class="badges">
+
+        <!-- Python -->
+        <span class="badge" style="background:linear-gradient(145deg,#1e3a5f,#2b5282)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.89S0 5.789 0 11.969c0 6.18 3.403 5.963 3.403 5.963h2.031v-2.867s-.109-3.403 3.347-3.403h5.768s3.238.052 3.238-3.13V3.13S18.315 0 11.914 0zm-3.2 1.81a1.047 1.047 0 1 1 0 2.094 1.047 1.047 0 0 1 0-2.094z" fill="#FFD43B"/>
+              <path d="M12.086 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752H12v-.826h8.131S24 18.211 24 12.031c0-6.18-3.403-5.963-3.403-5.963H18.566v2.867s.109 3.403-3.347 3.403H9.451s-3.238-.052-3.238 3.13v5.402S5.685 24 12.086 24zm3.2-1.81a1.047 1.047 0 1 1 0-2.094 1.047 1.047 0 0 1 0 2.094z" fill="#4584B6"/>
+            </svg>
+          </span>
+          Python
+        </span>
+
+        <!-- HTML5 -->
+        <span class="badge" style="background:linear-gradient(145deg,#6b1a0a,#a62d10)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z" fill="#fff"/>
+            </svg>
+          </span>
+          HTML5
+        </span>
+
+        <!-- CSS3 -->
+        <span class="badge" style="background:linear-gradient(145deg,#0a2e5c,#1152a0)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.413z" fill="#fff"/>
+            </svg>
+          </span>
+          CSS3
+        </span>
+
+        <!-- JavaScript -->
+        <span class="badge" style="background:linear-gradient(145deg,#5a4a00,#9a7c00)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z" fill="#f7df1e"/>
+            </svg>
+          </span>
+          JavaScript
+        </span>
+
+        <!-- AWS -->
+        <span class="badge" style="background:linear-gradient(145deg,#1a0f00,#3d2200)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.763 10.036c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335a.383.383 0 0 1-.208.072c-.08 0-.16-.04-.239-.112a2.47 2.47 0 0 1-.287-.375 6.18 6.18 0 0 1-.248-.471c-.622.734-1.405 1.101-2.347 1.101-.67 0-1.205-.191-1.596-.574-.391-.384-.59-.894-.59-1.533 0-.678.239-1.23.726-1.644.487-.415 1.133-.623 1.955-.623.272 0 .551.024.846.064.296.04.6.104.918.176v-.583c0-.607-.127-1.03-.375-1.277-.255-.248-.686-.367-1.3-.367-.28 0-.568.031-.863.103-.295.072-.583.16-.862.272a2.287 2.287 0 0 1-.28.104.488.488 0 0 1-.127.023c-.112 0-.168-.08-.168-.247v-.391c0-.128.016-.224.056-.28a.597.597 0 0 1 .224-.167c.279-.144.614-.264 1.005-.36a4.84 4.84 0 0 1 1.246-.151c.95 0 1.644.216 2.091.647.439.43.662 1.085.662 1.963v2.586zm-3.24 1.214c.263 0 .534-.048.822-.144.287-.096.543-.271.758-.51.128-.152.224-.32.272-.512.047-.191.08-.423.08-.694v-.335a6.66 6.66 0 0 0-.735-.136 6.02 6.02 0 0 0-.75-.048c-.535 0-.926.104-1.19.32-.263.215-.39.518-.39.917 0 .375.095.655.295.846.191.2.47.296.838.296zm6.41.862c-.144 0-.24-.024-.304-.08-.064-.048-.12-.16-.168-.311L7.586 5.55a1.398 1.398 0 0 1-.072-.32c0-.128.064-.2.191-.2h.783c.151 0 .255.025.31.08.065.048.113.16.16.312l1.342 5.284 1.245-5.284c.04-.16.088-.264.151-.312a.549.549 0 0 1 .32-.08h.638c.152 0 .256.025.32.08.063.048.12.16.151.312l1.261 5.348 1.381-5.348c.048-.16.104-.264.16-.312a.52.52 0 0 1 .311-.08h.743c.127 0 .2.065.2.2 0 .04-.009.08-.017.128a1.137 1.137 0 0 1-.056.2l-1.923 6.17c-.048.16-.104.263-.168.311a.51.51 0 0 1-.303.08h-.687c-.151 0-.255-.024-.32-.08-.063-.056-.119-.16-.15-.32l-1.238-5.148-1.23 5.14c-.04.16-.087.264-.15.32-.065.056-.177.08-.32.08zm10.256.215c-.415 0-.83-.048-1.229-.143-.399-.096-.71-.2-.918-.32-.128-.071-.215-.151-.247-.223a.563.563 0 0 1-.048-.224v-.407c0-.167.064-.247.183-.247.048 0 .096.008.144.024.048.016.12.048.2.08.271.12.566.215.878.279.319.064.63.096.95.096.502 0 .894-.088 1.165-.264a.86.86 0 0 0 .41-.758.777.777 0 0 0-.215-.559c-.144-.151-.416-.287-.807-.415l-1.157-.36c-.583-.183-1.014-.454-1.277-.813a1.902 1.902 0 0 1-.4-1.158c0-.335.073-.63.216-.886.144-.255.335-.479.575-.654.24-.184.51-.32.83-.415.32-.096.655-.136 1.006-.136.175 0 .359.008.535.032.183.024.35.056.518.088.16.04.312.08.455.127.144.048.256.096.336.144a.69.69 0 0 1 .24.2.43.43 0 0 1 .071.263v.375c0 .168-.064.256-.184.256a.83.83 0 0 1-.303-.096 3.652 3.652 0 0 0-1.532-.311c-.455 0-.815.071-1.062.223-.248.152-.375.383-.375.71 0 .224.08.416.24.567.159.152.454.304.877.44l1.134.358c.574.184.99.44 1.237.767.247.327.367.702.367 1.117 0 .343-.072.655-.207.926-.144.271-.335.51-.583.703-.248.2-.543.343-.886.447-.36.111-.743.167-1.166.167z" fill="#f90"/>
+              <path d="M21.616 15.924c-2.607 1.932-6.392 2.958-9.648 2.958-4.564 0-8.672-1.688-11.776-4.496-.248-.224-.024-.527.272-.351 3.352 1.95 7.496 3.126 11.776 3.126 2.887 0 6.063-.598 8.984-1.843.439-.192.806.287.392.606z" fill="#f90"/>
+              <path d="M22.692 14.692c-.335-.431-2.22-.207-3.074-.103-.255.032-.295-.192-.064-.358 1.502-1.053 3.967-.75 4.254-.399.287.36-.08 2.83-1.486 4.01-.215.184-.423.088-.327-.151.318-.79 1.031-2.566.697-2.999z" fill="#f90"/>
+            </svg>
+          </span>
+          AWS
+        </span>
+      </div>
+    </div>
+
+    <div class="tech-group">
+      <div class="tech-group-name">ML / Data Science</div>
+      <div class="badges">
+
+        <!-- TensorFlow -->
+        <span class="badge" style="background:linear-gradient(145deg,#3d1a00,#7a3300)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.292 5.856L11.54 0v24l-4.095-2.378V7.603l-6.168 3.564.015-5.31zm21.43 5.311l-6.168-3.564v9.609l-4.095 2.378V0l10.248 5.856.015 5.311z" fill="#FF6F00"/>
+            </svg>
+          </span>
+          TensorFlow
+        </span>
+
+        <!-- PyTorch -->
+        <span class="badge" style="background:linear-gradient(145deg,#3d0e08,#7a1c12)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12.005 0L4.952 7.053a9.865 9.865 0 000 13.953 9.865 9.865 0 0013.954 0 9.865 9.865 0 000-13.953l-1.938 1.938a7.176 7.176 0 010 10.148 7.176 7.176 0 01-10.148 0 7.176 7.176 0 010-10.148l5.185-5.04zM15.035 3.561a1.357 1.357 0 100 2.713 1.357 1.357 0 000-2.713z" fill="#EE4C2C"/>
+            </svg>
+          </span>
+          PyTorch
+        </span>
+
+        <!-- Keras -->
+        <span class="badge" style="background:linear-gradient(145deg,#3d0000,#720000)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0v24h24V0zm18.93 17.86l-3.77-3.52-1.45 1.4v2.12H11.6V6.14h2.11v6.98l4.82-4.68h2.63l-4.4 4.22 4.81 5.2z" fill="#D00000"/>
+            </svg>
+          </span>
+          Keras
+        </span>
+
+        <!-- Scikit-learn -->
+        <span class="badge" style="background:linear-gradient(145deg,#3d2000,#7a4000)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 2c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8zm-1 3v2.27l-2.38 1.37.02-2.27zm2 0l2.36 1.37-.02 2.27L13 9.27zm-5.02 2.88l2.02 1.17v2.7L6 12.64zm8.04 0l2 1.63-2 1.24v-2.7zm-5.02 2.67l2.02-1.17 2 1.17-2 2.28zm-1 .68v2.7l-2-1.25zm6.02 0l2 1.45-2 1.25z" fill="#F7931E"/>
+            </svg>
+          </span>
+          Scikit-learn
+        </span>
+
+        <!-- Pandas -->
+        <span class="badge" style="background:linear-gradient(145deg,#06001a,#100030)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.172 3.124H7.25v5.13h1.922zm0 7.817H7.25v10.108h1.922zm-1.003-4.06a1.27 1.27 0 100 2.542 1.27 1.27 0 000-2.542zM16.75 3.124h-1.922v10.108h1.922zm0 12.795h-1.922v5.13h1.922zm-.961-4.06a1.27 1.27 0 100 2.54 1.27 1.27 0 000-2.54z" fill="#150458"/>
+              <path d="M9.172 3.124H7.25v5.13h1.922zm0 7.817H7.25v10.108h1.922zm-1.003-4.06a1.27 1.27 0 100 2.542 1.27 1.27 0 000-2.542zM16.75 3.124h-1.922v10.108h1.922zm0 12.795h-1.922v5.13h1.922zm-.961-4.06a1.27 1.27 0 100 2.54 1.27 1.27 0 000-2.54z" fill="#E70488" opacity=".6"/>
+            </svg>
+          </span>
+          Pandas
+        </span>
+
+        <!-- NumPy -->
+        <span class="badge" style="background:linear-gradient(145deg,#001830,#003060)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.788 2.862L5.727 5.75v5.772l5.06 2.888 5.063-2.888V5.75zm0 1.31l3.694 2.11-3.694 2.11L7.095 6.28zM6.433 7.01l3.695 2.11v4.217L6.433 11.23zm8.71 0v4.219l-3.694 2.108V9.12zM5.727 13.477v5.773l5.061 2.888 5.063-2.888v-5.773l-5.063 2.888zm1.375.727l3.686 2.107-3.686 2.11zm6.685 0l.001 4.217-3.687 2.108v-4.216zm-5.31.567l3.624 2.065v4.13L8.477 18.8z" fill="#4DABCF"/>
+            </svg>
+          </span>
+          NumPy
+        </span>
+
+        <!-- Matplotlib -->
+        <span class="badge" style="background:linear-gradient(145deg,#001428,#002a55)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="9" fill="none" stroke="#11559C" stroke-width="2"/>
+              <path d="M12 3v9l6.36 6.36" stroke="#11559C" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <circle cx="12" cy="12" r="2" fill="#C05020"/>
+              <path d="M3 12h18M12 3v18" stroke="#11559C" stroke-width=".8" opacity=".4"/>
+            </svg>
+          </span>
+          Matplotlib
+        </span>
+
+        <!-- SciPy -->
+        <span class="badge" style="background:linear-gradient(145deg,#001a3d,#003380)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.98 2C6.476 2 2 6.478 2 11.98c0 5.503 4.476 9.98 9.98 9.98 5.503 0 9.98-4.477 9.98-9.98C21.96 6.478 17.483 2 11.98 2zm-.42 3.025c1.26 0 2.456.302 3.51.837L8.786 12.7a7.408 7.408 0 01-.743-3.262c0-2.44 1.18-4.605 2.998-5.974a7.367 7.367 0 01.519-.44zm2.978.74a7.42 7.42 0 013.384 6.215c0 1.44-.41 2.784-1.12 3.922L10.007 9.08a7.408 7.408 0 014.551-3.315zm-7.12 6.28l6.753 6.752a7.413 7.413 0 01-3.192.726 7.435 7.435 0 01-7.435-7.435c0-.84.13-1.65.37-2.41zm8.26 4.574l.01.01-1.024.998a7.428 7.428 0 01-2.21.52z" fill="#8CAAE6"/>
+            </svg>
+          </span>
+          SciPy
+        </span>
+      </div>
+    </div>
+
+    <div class="tech-group">
+      <div class="tech-group-name">Dev Tools</div>
+      <div class="badges">
+
+        <!-- Git -->
+        <span class="badge" style="background:linear-gradient(145deg,#3d1200,#7a2400)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M23.546 10.93L13.067.452a1.55 1.55 0 00-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 012.327 2.341l2.658 2.66a1.838 1.838 0 011.946 3.003 1.838 1.838 0 01-2.531-2.535L13.64 8.628v6.227a1.838 1.838 0 11-1.497-.05V8.576a1.838 1.838 0 01-.997-2.413L8.397 3.406 .454 11.351a1.55 1.55 0 000 2.189l10.48 10.478a1.55 1.55 0 002.186 0l10.426-10.426a1.55 1.55 0 000-2.188z" fill="#F05032"/>
+            </svg>
+          </span>
+          Git
+        </span>
+
+        <!-- GitHub -->
+        <span class="badge" style="background:linear-gradient(145deg,#0d0d0d,#1c1c1c)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="#fff"/>
+            </svg>
+          </span>
+          GitHub
+        </span>
+
+        <!-- GitLab -->
+        <span class="badge" style="background:linear-gradient(145deg,#2d1500,#5a2b00)">
+          <span class="logo">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.845.904C4.605.904 4.4 1.053 4.32 1.28L.034 13.55a.881.881 0 00.319 1.003l11.625 8.45a.066.066 0 00.072.004l.006-.004 11.625-8.45a.881.881 0 00.319-1.003L19.674 1.28a.453.453 0 00-.853 0l-2.94 8.98H8.119L5.18 1.28A.453.453 0 004.845.904z" fill="#FC6D26"/>
+            </svg>
+          </span>
+          GitLab
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- GITHUB STATS -->
+  <section>
+    <div class="stitle"><span>📊</span> GitHub Stats</div>
+    <div class="stats-imgs">
+      <div class="stats-row">
+        <img
+          src="https://github-readme-stats.vercel.app/api?username=giradabhanuprasad&show_icons=true&theme=github_dark&bg_color=0a0a0a&border_color=1c1c1c&title_color=7c83f5&icon_color=3ecf8e&text_color=777&hide_border=false&count_private=true"
+          alt="GitHub Stats"
+          onerror="this.style.display='none'"
+        />
+        <img
+          src="https://github-readme-stats.vercel.app/api/top-langs/?username=giradabhanuprasad&layout=compact&theme=github_dark&bg_color=0a0a0a&border_color=1c1c1c&title_color=7c83f5&text_color=777"
+          alt="Top Languages"
+          onerror="this.style.display='none'"
+        />
+      </div>
+      <img
+        src="https://github-readme-streak-stats.herokuapp.com/?user=giradabhanuprasad&theme=github-dark-blue&background=0a0a0a&border=1c1c1c&ring=7c83f5&fire=f5a623&currStreakLabel=7c83f5&sideLabels=777&dates=444"
+        alt="GitHub Streak"
+        onerror="this.style.display='none'"
+      />
+    </div>
+
+    <div class="contrib" style="margin-top:12px">
+      <div class="contrib-label">Contribution Activity</div>
+      <div class="cgrid" id="cg"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TROPHIES -->
+  <section>
+    <div class="stitle"><span>🏆</span> GitHub Trophies</div>
+    <img
+      class="trophy-img"
+      src="https://github-profile-trophy.vercel.app/?username=giradabhanuprasad&theme=darkhub&no-frame=true&no-bg=true&margin-w=6&row=1"
+      alt="Trophies"
+      onerror="this.style.display='none'"
+    />
+    <div class="trophy-manual">
+      <div class="tc"><div class="em">🏆</div><div class="tn">Commits</div></div>
+      <div class="tc"><div class="em">⭐</div><div class="tn">Stars</div></div>
+      <div class="tc"><div class="em">📦</div><div class="tn">Repos</div></div>
+      <div class="tc"><div class="em">🔥</div><div class="tn">Streak</div></div>
+      <div class="tc"><div class="em">🍴</div><div class="tn">Forks</div></div>
+      <div class="tc"><div class="em">🐛</div><div class="tn">Issues</div></div>
+      <div class="tc"><div class="em">🔄</div><div class="tn">PRs</div></div>
+      <div class="tc"><div class="em">👥</div><div class="tn">Followers</div></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Girada Bhanuprasad · 2026</span>
+    <a href="mailto:giradabhanuprasad@gmail.com">giradabhanuprasad@gmail.com</a>
+  </footer>
+
+</div>
+
+<script>
+  // Contribution heatmap
+  const g = document.getElementById('cg');
+  const l = ['lv0','lv0','lv0','lv0','lv1','lv1','lv2','lv2','lv3','lv4'];
+  for (let i=0;i<53*7;i++){
+    const c=document.createElement('div');
+    c.className='cc '+l[Math.floor(Math.random()*l.length)];
+    g.appendChild(c);
+  }
+
+  // Scroll reveal
+  const io = new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.opacity='1';
+        e.target.style.transform='translateY(0)';
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.08});
+  document.querySelectorAll('section,.tc,.about-list li').forEach(el=>{
+    el.style.cssText+='opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .45s ease;';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
